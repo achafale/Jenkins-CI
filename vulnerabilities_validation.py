@@ -7,6 +7,13 @@ file_path = 'vulns.json'
 with open(file_path, "r") as file:
     json_data = json.load(file)
 
+if not json_data['vulnerabilities']:
+    print()
+    print("==================================================================")
+    print("Scan result : PASS")
+    print("==================================================================")
+    sys.exit(0)
+
 normalized_json = []
 for vuln_dict in json_data['vulnerabilities']:
     vuln_report = {}
