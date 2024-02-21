@@ -6,8 +6,30 @@ pd.options.mode.chained_assignment = None  # Disable the SettingWithCopyWarning
 
 # reading the csv file
 file_path = 'vulns.json'
-with open(file_path, "r") as file:
-    json_data = json.load(file)
+try:
+    with open(file_path, "r") as file:
+        json_data = json.load(file)
+except FileNotFoundError:
+    print(f"The file {file_path} was not found.")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
+except json.JSONDecodeError:
+    print(f"The file {file_path} does not contain valid JSON.")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
+except Exception as e:
+    print(f"An error occurred: {e}")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
 
 if not json_data['vulnerabilities']:
     print()
@@ -41,8 +63,30 @@ sorted_df = filtered_df.sort_values(by="severity", key=lambda x: x.map(custom_se
 # print(sorted_df.to_string())
 
 file_path = 'policy_evaluation.json'
-with open(file_path, "r") as file:
-    policy_evaluation_data = json.load(file)
+try:
+    with open(file_path, "r") as file:
+        policy_evaluation_data = json.load(file)
+except FileNotFoundError:
+    print(f"The file {file_path} was not found.")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
+except json.JSONDecodeError:
+    print(f"The file {file_path} does not contain valid JSON.")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
+except Exception as e:
+    print(f"An error occurred: {e}")
+    print()
+    print("==================================================================")
+    print("Scan result : FAIL")
+    print("==================================================================")
+    sys.exit(1)
 
 image_id = policy_evaluation_data["detail"]["result"]["image_id"]
 allowlist_vuln = policy_evaluation_data["detail"]["result"]["result"][image_id]["result"]
