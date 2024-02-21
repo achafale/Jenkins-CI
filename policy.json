@@ -1,0 +1,116 @@
+{
+    "id": "sectools-policy-tao-24.02-release",
+    "mappings": [
+        {
+            "id": "97ceccc4-b038-4d90-996a-b7e897da6554",
+            "image": {
+                "type": "tag",
+                "value": "*"
+            },
+            "name": "default",
+            "registry": "*",
+            "repository": "*",
+            "allowlist_ids": [
+                "551e089b-0f9c-413f-a522-e2cd043963c2"
+            ],
+            "rule_set_ids": [
+                "sectools-base-policy"
+            ]
+        }
+    ],
+    "name": "SecTools Policy TAO 24.02 Release",
+    "version": "V2",
+    "denylisted_images": [],
+    "allowlisted_images": [],
+    "description": "Collection of SecTools policies.",
+    "allowlists": [
+        {
+            "id": "551e089b-0f9c-413f-a522-e2cd043963c2",
+            "name": "Allowlist for 24.02 release",
+            "version": "1_0",
+            "items": [
+                {
+                    "gate": "vulnerabilities",
+                    "trigger_id": "*Pillow*",
+                    "id": "1",
+                    "expires_on": "2025-02-12T10:58:21Z"
+                },
+                {
+                    "gate": "vulnerabilities",
+                    "trigger_id": "*linux-libc-dev*",
+                    "id": "2",
+                    "expires_on": "2025-02-12T10:58:21Z"
+                },
+                {
+                    "gate": "vulnerabilities",
+                    "trigger_id": "*libpmi2*",
+                    "id": "3",
+                    "expires_on": "2025-02-12T10:58:21Z"
+                },
+                {
+                    "gate": "vulnerabilities",
+                    "trigger_id": "*libslurm37*",
+                    "id": "4",
+                    "expires_on": "2025-02-12T10:58:21Z"
+                },
+                {
+                    "gate": "vulnerabilities",
+                    "trigger_id": "*libslurm37*",
+                    "id": "5",
+                    "expires_on": "2025-02-12T10:58:21Z"
+                }
+            ],
+            "description": "Allowlist for 24.02 release"
+        }
+    ],
+    "rule_sets": [
+        {
+            "id": "sectools-base-policy",
+            "name": "Base Policy",
+            "rules": [
+                {
+                    "action": "WARN",
+                    "gate": "vulnerabilities",
+                    "id": "c1c12343-acdf-4a36-a76e-832ce9183623",
+                    "params": [
+                        {
+                            "name": "package_type",
+                            "value": "all"
+                        },
+                        {
+                            "name": "severity_comparison",
+                            "value": "="
+                        },
+                        {
+                            "name": "severity",
+                            "value": "medium"
+                        }
+                    ],
+                    "trigger": "package"
+                },
+                {
+                    "action": "STOP",
+                    "gate": "vulnerabilities",
+                    "id": "06363d27-73ad-425e-92e5-6aa4538f09f5",
+                    "params": [
+                        {
+                            "name": "package_type",
+                            "value": "all"
+                        },
+                        {
+                            "name": "severity_comparison",
+                            "value": ">"
+                        },
+                        {
+                            "name": "severity",
+                            "value": "medium"
+                        }
+                    ],
+                    "trigger": "package"
+                }
+            ],
+            "version": "1_0",
+            "description": "Base policy for a basic severity check in vulns."
+        }
+    ]
+}
