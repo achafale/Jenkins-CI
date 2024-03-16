@@ -88,15 +88,14 @@ except Exception as e:
     print("==================================================================")
     sys.exit(1)
 
-image_id = policy_evaluation_data["detail"]["result"]["image_id"]
-allowlist_vuln = policy_evaluation_data["detail"]["result"]["result"][image_id]["result"]
+allowlist_vuln = policy_evaluation_data["evaluations"][0]["details"]["findings"]
 
-allowlist_vuln_df = pd.DataFrame(allowlist_vuln['rows'], columns=allowlist_vuln['header'])
+allowlist_vuln_df = pd.DataFrame(allowlist_vuln)
 
-allowlist_filtered_vuln = allowlist_vuln_df[(allowlist_vuln_df['Gate_Action'] == 'stop') & allowlist_vuln_df['Check_Output'].str.contains('HIGH|CRITICAL')]
+allowlist_filtered_vuln = allowlist_vuln_df[(allowlist_vuln_df['action'] == 'stop') & allowlist_vuln_df['message'].str.contains('HIGH|CRITICAL')]
 
 # Splitting the 'Trigger_Id' column based on '+'
-allowlist_filtered_vuln[['vuln', 'Trigger_Id_Temp']] = allowlist_filtered_vuln['Trigger_Id'].str.split('+', expand=True)
+allowlist_filtered_vuln[['vuln', 'Trigger_Id_Temp']] = allowlist_filtered_vuln['trigger_id'].str.split('+', expand=True)
 
 # Splitting the temporary column based on '-'
 allowlist_filtered_vuln[['package_name', 'package_version']] = allowlist_filtered_vuln['Trigger_Id_Temp'].str.split('-', n=1, expand=True)
@@ -107,7 +106,10 @@ allowlist_filtered_vuln.drop(columns=['Trigger_Id_Temp'], inplace=True)
 join_columns = ['vuln', 'package_name', 'package_version']
 inner_joined_df = pd.merge(sorted_df, allowlist_filtered_vuln, on=join_columns, how='inner')
 
+print("==================================================================")
+print("Fix below vulnerabilities : ")
 print(inner_joined_df[["vuln", "url", "severity", "package_name", "package_version", "package_path"]].to_string())
+print("==================================================================")
 
 high_critical_count = inner_joined_df[inner_joined_df['severity'].isin(['High', 'Critical'])].shape[0]
 if high_critical_count > 4:
