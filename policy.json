@@ -52,12 +52,6 @@
                     "trigger_id": "*libslurm37*",
                     "id": "4",
                     "expires_on": "2025-02-12T10:58:21Z"
-                },
-                {
-                    "gate": "vulnerabilities",
-                    "trigger_id": "*libslurm37*",
-                    "id": "5",
-                    "expires_on": "2025-02-12T10:58:21Z"
                 }
             ],
             "description": "Allowlist for 24.02 release"
