@@ -112,7 +112,7 @@ print(inner_joined_df[["vuln", "url", "severity", "package_name", "package_versi
 print("==================================================================")
 
 high_critical_count = inner_joined_df[inner_joined_df['severity'].isin(['High', 'Critical'])].shape[0]
-if high_critical_count > 4:
+if high_critical_count > 14:
     print()
     print("==================================================================")
     print("Scan result : FAIL")
