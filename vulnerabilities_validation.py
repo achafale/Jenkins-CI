@@ -95,7 +95,7 @@ allowlist_vuln_df = pd.DataFrame(allowlist_vuln)
 allowlist_filtered_vuln = allowlist_vuln_df[(allowlist_vuln_df['action'] == 'stop') & allowlist_vuln_df['message'].str.contains('HIGH|CRITICAL')]
 
 # Splitting the 'Trigger_Id' column based on '+'
-allowlist_filtered_vuln[['vuln', 'Trigger_Id_Temp']] = allowlist_filtered_vuln['trigger_id'].str.split('+', expand=True)
+allowlist_filtered_vuln[['vuln', 'Trigger_Id_Temp']] = allowlist_filtered_vuln['trigger_id'].str.split('+', n=1, expand=True)
 
 # Splitting the temporary column based on '-'
 allowlist_filtered_vuln[['package_name', 'package_version']] = allowlist_filtered_vuln['Trigger_Id_Temp'].str.split('-', n=1, expand=True)
