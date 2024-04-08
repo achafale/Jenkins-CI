@@ -15,7 +15,7 @@ SSA_TOKEN=$(echo $json_output | jq -r '.access_token')
 
 echo "Done generating access token ..."
 
-CONTAINER_ARCHIVE="rc_1_build.tar"
+CONTAINER_ARCHIVE="container_image.tar"
 CONTAINER_SCAN_POLICY="policy.json"
 
 # docker save hello-world > hello.tar
