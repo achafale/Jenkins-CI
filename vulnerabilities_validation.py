@@ -17,6 +17,7 @@ except FileNotFoundError:
     print("==================================================================")
     # sys.exit(1)
     sys.exit(0)
+
 except json.JSONDecodeError:
     print(f"The file {file_path} does not contain valid JSON.")
     print()
@@ -25,6 +26,7 @@ except json.JSONDecodeError:
     print("==================================================================")
     # sys.exit(1)
     sys.exit(0)
+
 except Exception as e:
     print(f"An error occurred: {e}")
     print()
@@ -77,6 +79,7 @@ except FileNotFoundError:
     print("==================================================================")
     # sys.exit(1)
     sys.exit(0)
+
 except json.JSONDecodeError:
     print(f"The file {file_path} does not contain valid JSON.")
     print()
@@ -85,6 +88,7 @@ except json.JSONDecodeError:
     print("==================================================================")
     # sys.exit(1)
     sys.exit(0)
+    
 except Exception as e:
     print(f"An error occurred: {e}")
     print()
@@ -114,10 +118,10 @@ inner_joined_df = pd.merge(sorted_df, allowlist_filtered_vuln, on=join_columns, 
 
 print("==================================================================")
 print("Fix below vulnerabilities : ")
-print(inner_joined_df[["vuln", "url", "severity", "package_name", "package_version", "package_path"]].to_string())
+print(inner_joined_df[["vuln", "url", "severity_x", "package_name", "package_version", "package_path"]].to_string())
 print("==================================================================")
 
-high_critical_count = inner_joined_df[inner_joined_df['severity'].isin(['High', 'Critical'])].shape[0]
+high_critical_count = inner_joined_df[inner_joined_df['severity_x'].isin(['High', 'Critical'])].shape[0]
 if high_critical_count > 14:
     print()
     print("==================================================================")
