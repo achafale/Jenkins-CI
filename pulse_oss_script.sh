@@ -3,7 +3,7 @@ NSPECT_ID="NSPECT-76DN-OP7I"
 
 # Run the curl command and capture the output
 json_output=$(curl --location --request POST 'https://x9thwm-cootr2q1jdv5p7b8iw4fs4ob3x6nqqsoznyk.ssa.nvidia.com/token' \
-  --user 'nvssa-prd-4tRcjNpunCJVFgVq7o1iYtC9pWIX-RxopTGdLecMinQ:ssap-inxnVdixO0dyR3Ednxd' \
+  --user 'nvssa-prd-4tRcjNpunCJVFgVq7o1iYtC9pWIX-RxopTGdLecMinQ:ssap-q829TuK8H09ehhjV7Yx' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'grant_type=client_credentials' \
   --data-urlencode 'scope=nspect.verify scan.anchore')
